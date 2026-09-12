@@ -1,0 +1,28 @@
+{
+  "run_id": "16ccfd89-cd29-4c76-8e0f-7be54d4d0fb8",
+  "capability_id": "edc702dd-ecdb-4ac2-87ef-ce619ad48767",
+  "capability_name": "look_up_member_balance",
+  "capability_version": "1.0.0",
+  "started_at": "2026-09-12T22:37:03.804504+00:00",
+  "finished_at": "2026-09-12T22:37:04.383321+00:00",
+  "outcome": "hard_failure",
+  "outcome_code": null,
+  "message": "Unexpected error: Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5001/login\nCall log:\n  - navigating to \"http://localhost:5001/login\", waiting until \"domcontentloaded\"\n",
+  "outputs": {},
+  "steps": [
+    {
+      "step_id": "63d5ef36",
+      "sequence": 0,
+      "description": "Navigate to CoreBanker login page",
+      "status": "failed",
+      "outcome_type": "hard_failure",
+      "detail": "Page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:5001/login\nCall log:\n  - navigating to \"http://localhost:5001/login\", waiting until \"domcontentloaded\"\n",
+      "screenshot_path": null,
+      "duration_ms": null
+    }
+  ],
+  "failed_step": "Navigate to CoreBanker login page",
+  "expected": null,
+  "observed": null,
+  "failure_screenshot": "evidence/replay_error_4adc77fd/failure_step_000.png"
+}

@@ -1,0 +1,88 @@
+{
+  "run_id": "e464b494-f828-4993-bf3f-ed611883915f",
+  "capability_id": "911af97c-7519-4a9e-ab27-5420bfa91213",
+  "capability_name": "look_up_member_balance",
+  "capability_version": "1.0.0",
+  "started_at": "2026-09-12T22:11:16.715248+00:00",
+  "finished_at": "2026-09-12T22:11:21.016428+00:00",
+  "outcome": "business_result",
+  "outcome_code": "MEMBER_NOT_FOUND",
+  "message": "No member found matching the search query",
+  "outputs": {},
+  "steps": [
+    {
+      "step_id": "f9952687",
+      "sequence": 0,
+      "description": "Navigate to CoreBanker login page",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 53
+    },
+    {
+      "step_id": "93108e2f",
+      "sequence": 1,
+      "description": "Enter username 'admin'",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 21
+    },
+    {
+      "step_id": "e3679239",
+      "sequence": 2,
+      "description": "Enter password",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 14
+    },
+    {
+      "step_id": "8da0f588",
+      "sequence": 3,
+      "description": "Click Log In button",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 116
+    },
+    {
+      "step_id": "9e7cf482",
+      "sequence": 4,
+      "description": "Navigate to member search",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 43
+    },
+    {
+      "step_id": "288cef30",
+      "sequence": 5,
+      "description": "Wait for search results to load",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 11
+    },
+    {
+      "step_id": "76c7df5d",
+      "sequence": 6,
+      "description": "Click View link for the first matching member",
+      "status": "skipped",
+      "outcome_type": "business_result",
+      "detail": "No member found matching the search query",
+      "screenshot_path": null,
+      "duration_ms": null
+    }
+  ],
+  "failed_step": null,
+  "expected": null,
+  "observed": null,
+  "failure_screenshot": null
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoreBanker - Account Actions</title>
+  <style>
+    body { background: #d4d0c8; font-family: Arial, sans-serif; margin: 0; }
+    .topbar { background: #000080; color: white; padding: 4px 12px; font-size: 13px;
+              display: flex; justify-content: space-between; align-items: center; }
+    .topbar a { color: #aad; font-size: 11px; }
+    .content { padding: 20px; }
+    .panel { background: #e8e8e8; border: 2px outset #fff; padding: 12px; margin-bottom: 12px; }
+    .panel h3 { font-size: 13px; margin: 0 0 8px 0; }
+    .field-table td { padding: 4px 4px; font-size: 13px; }
+    input[type=text] { border: 2px inset #888; background: white; padding: 2px 4px; width: 160px; font-size: 13px; }
+    select { border: 2px inset #888; background: white; padding: 2px 4px; font-size: 13px; }
+    input[type=submit] { background: #d4d0c8; border: 2px outset #fff; padding: 3px 14px; font-size: 12px; cursor: pointer; }
+    .confirm-box { background: #ffffcc; border: 2px solid #cc8800; padding: 10px; margin-bottom: 12px; font-size: 13px; }
+    .confirm-box strong { display: block; margin-bottom: 8px; }
+    .error { color: red; font-size: 12px; padding: 4px 0; }
+    .success { color: green; font-size: 13px; padding: 8px 0; border: 1px solid green; background: #e8ffe8; padding: 8px; }
+    .breadcrumb { font-size: 12px; color: #555; margin-bottom: 10px; }
+    .breadcrumb a { color: #000080; }
+    .acct-info td:first-child { color: #555; width: 100px; }
+    .acct-info { font-size: 13px; border-collapse: collapse; }
+    .acct-info td { padding: 2px 4px; }
+  </style>
+</head>
+<body>
+<div class="topbar">
+  <span>CoreBanker &mdash; Account Actions</span>
+  <a href="/logout">Log Out</a>
+</div>
+<div class="content">
+  <div class="breadcrumb">
+    <a href="/members">Search</a> &gt;
+    <a href="/members/{{ member.id }}">{{ member.name }}</a> &gt;
+    Account {{ account_id }}
+  </div>
+
+  <div class="panel">
+    <h3>Account Information</h3>
+    <table class="acct-info">
+      <tr><td>Account:</td><td>{{ account_id }}</td></tr>
+      <tr><td>Type:</td><td>{{ account.type }}</td></tr>
+      <tr><td>Balance:</td><td>${{ "%.2f"|format(account.balance) }}</td></tr>
+      <tr><td>Status:</td><td>{{ account.status }}</td></tr>
+    </table>
+  </div>
+
+  {% if success %}
+  <div class="success">{{ success }}</div>
+  {% endif %}
+
+  {% if error %}
+  <div class="error">{{ error }}</div>
+  {% endif %}
+
+  {% if confirmation %}
+  <!-- Confirmation dialog — acts as the "unexpected dialog" the replay must handle -->
+  <div class="confirm-box">
+    <strong>Confirmation Required</strong>
+    {{ confirmation.message }}
+    <br><br>
+    <form method="POST">
+      <input type="hidden" name="action_type" value="{{ confirmation.action_type }}">
+      {% if confirmation.amount %}
+      <input type="hidden" name="amount" value="{{ confirmation.amount }}">
+      {% endif %}
+      <input type="hidden" name="confirmed" value="yes">
+      <input type="submit" value="Confirm">
+      &nbsp;&nbsp;
+      <a href="/members/{{ member.id }}/account/{{ account_id }}/action">Cancel</a>
+    </form>
+  </div>
+  {% else %}
+  <div class="panel">
+    <h3>Perform Action</h3>
+    <form method="POST">
+      <table class="field-table">
+        <tr>
+          <td>Action:</td>
+          <td>
+            <select name="action_type">
+              <option value="">-- Select --</option>
+              <option value="open_sub_account">Open Sub-Account</option>
+              <option value="deposit">Deposit Funds</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Amount&nbsp;($):</td>
+          <td><input type="text" name="amount" placeholder="0.00"></td>
+        </tr>
+        <tr>
+          <td colspan="2" align="right">
+            <input type="submit" value="Proceed">
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+  {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoreBanker - Member Detail</title>
+  <style>
+    body { background: #d4d0c8; font-family: Arial, sans-serif; margin: 0; }
+    .topbar { background: #000080; color: white; padding: 4px 12px; font-size: 13px;
+              display: flex; justify-content: space-between; align-items: center; }
+    .topbar a { color: #aad; font-size: 11px; }
+    .content { padding: 20px; }
+    .info-panel { background: #e8e8e8; border: 2px outset #fff; padding: 10px; margin-bottom: 12px; }
+    .info-panel h3 { font-size: 13px; margin: 0 0 6px 0; }
+    .info-table { border-collapse: collapse; font-size: 13px; }
+    .info-table td { padding: 2px 8px 2px 0; }
+    .info-table td:first-child { color: #555; width: 120px; }
+    .accounts-table { border-collapse: collapse; width: 100%; font-size: 13px; background: white; }
+    .accounts-table th { background: #000080; color: white; padding: 4px 8px; text-align: left; font-weight: normal; }
+    .accounts-table td { padding: 3px 8px; border-bottom: 1px solid #ccc; }
+    .accounts-table a { color: #000080; }
+    .not-found { color: red; font-size: 13px; padding: 10px 0; }
+    .breadcrumb { font-size: 12px; color: #555; margin-bottom: 10px; }
+    .breadcrumb a { color: #000080; }
+    .balance { font-family: monospace; }
+  </style>
+</head>
+<body>
+<div class="topbar">
+  <span>CoreBanker &mdash; Member Detail</span>
+  <a href="/logout">Log Out</a>
+</div>
+<div class="content">
+  <div class="breadcrumb"><a href="/members">Member Search</a> &gt; Member Detail</div>
+
+  {% if not_found %}
+  <div class="not-found">Member {{ member_id }} not found in the system.</div>
+  {% else %}
+  <div class="info-panel">
+    <h3>Member Information</h3>
+    <table class="info-table">
+      <tr><td>Member&nbsp;ID:</td><td>{{ member.id }}</td></tr>
+      <tr><td>Full&nbsp;Name:</td><td>{{ member.name }}</td></tr>
+      <tr><td>Status:</td><td>{{ member.status }}</td></tr>
+    </table>
+  </div>
+
+  <div class="info-panel">
+    <h3>Accounts</h3>
+    <table class="accounts-table">
+      <thead>
+        <tr><th>Account</th><th>Type</th><th>Balance</th><th>Status</th><th>&nbsp;</th></tr>
+      </thead>
+      <tbody>
+        {% for acct_id, acct in member.accounts.items() %}
+        <tr>
+          <td>{{ acct_id }}</td>
+          <td>{{ acct.type }}</td>
+          <td class="balance">${{ "%.2f"|format(acct.balance) }}</td>
+          <td>{{ acct.status }}</td>
+          <td><a href="/members/{{ member.id }}/account/{{ acct_id }}/action">Actions</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "run_id": "f957f07d-ac32-41f7-9274-a10befc0f7bf",
+  "capability_id": "20b9ef57-4e2f-43a6-8833-5a6e0e3809f2",
+  "capability_name": "look_up_member_balance",
+  "capability_version": "1.0.0",
+  "started_at": "2026-09-12T22:09:29.792627+00:00",
+  "finished_at": "2026-09-12T22:09:29.798692+00:00",
+  "outcome": "hard_failure",
+  "outcome_code": null,
+  "message": "Unexpected error: This event loop is already running",
+  "outputs": {},
+  "steps": [
+    {
+      "step_id": "97382ef8",
+      "sequence": 0,
+      "description": "Navigate to CoreBanker login page",
+      "status": "failed",
+      "outcome_type": "hard_failure",
+      "detail": "This event loop is already running",
+      "screenshot_path": null,
+      "duration_ms": null
+    }
+  ],
+  "failed_step": "Navigate to CoreBanker login page",
+  "expected": null,
+  "observed": null,
+  "failure_screenshot": null
+}

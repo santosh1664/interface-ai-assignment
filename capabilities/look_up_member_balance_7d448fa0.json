@@ -1,0 +1,306 @@
+{
+  "capability_id": "20b9ef57-4e2f-43a6-8833-5a6e0e3809f2",
+  "name": "look_up_member_balance",
+  "display_name": "Look Up Member Balance",
+  "description": "Log in to CoreBanker, search for a member by ID, navigate to their profile, and return their savings account balance.",
+  "version": "1.0.0",
+  "surface_type": "browser_legacy",
+  "entry_point": "http://localhost:5001",
+  "allowed_domains": [
+    "localhost",
+    "127.0.0.1"
+  ],
+  "parameters": [
+    {
+      "name": "member_id",
+      "type": "string",
+      "required": true,
+      "description": "Numeric member ID (e.g. '10001')",
+      "enum_values": null,
+      "sensitive": false
+    },
+    {
+      "name": "password",
+      "type": "string",
+      "required": true,
+      "description": "Operator password",
+      "enum_values": null,
+      "sensitive": true
+    }
+  ],
+  "outputs": [
+    {
+      "key": "savings_balance",
+      "type": "string",
+      "description": "Current savings account balance as displayed (e.g. '$12,450.00')",
+      "nullable": true
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "97382ef8",
+      "sequence": 0,
+      "description": "Navigate to CoreBanker login page",
+      "action": {
+        "type": "navigate",
+        "url_template": "http://localhost:5001/login",
+        "wait_for": "input[name='username']"
+      },
+      "checkpoint": null,
+      "precondition_checks": []
+    },
+    {
+      "step_id": "a61ec972",
+      "sequence": 1,
+      "description": "Enter username 'admin'",
+      "action": {
+        "type": "type",
+        "target": {
+          "locators": [
+            {
+              "strategy": "placeholder",
+              "value": "User ID",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Placeholder label for username field — stable across layout changes"
+            },
+            {
+              "strategy": "css_selector",
+              "value": "input[name='username']",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Name attribute fallback"
+            }
+          ],
+          "snapshot_text": "User ID",
+          "snapshot_role": null
+        },
+        "value_template": "admin",
+        "clear_first": true,
+        "risk": "safe"
+      },
+      "checkpoint": null,
+      "precondition_checks": []
+    },
+    {
+      "step_id": "c5bc69e5",
+      "sequence": 2,
+      "description": "Enter password",
+      "action": {
+        "type": "type",
+        "target": {
+          "locators": [
+            {
+              "strategy": "css_selector",
+              "value": "input[type='password']",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Password field — type attribute is stable on login forms"
+            },
+            {
+              "strategy": "placeholder",
+              "value": "Password",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Placeholder fallback"
+            }
+          ],
+          "snapshot_text": "Password",
+          "snapshot_role": null
+        },
+        "value_template": "{secret:password}",
+        "clear_first": true,
+        "risk": "safe"
+      },
+      "checkpoint": null,
+      "precondition_checks": []
+    },
+    {
+      "step_id": "93066f01",
+      "sequence": 3,
+      "description": "Click Log In button",
+      "action": {
+        "type": "click",
+        "target": {
+          "locators": [
+            {
+              "strategy": "text_content",
+              "value": "Log In",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Button label — stable as long as the login page exists"
+            },
+            {
+              "strategy": "css_selector",
+              "value": "input[type='submit']",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Submit fallback"
+            }
+          ],
+          "snapshot_text": "Log In",
+          "snapshot_role": "button"
+        },
+        "risk": "safe"
+      },
+      "checkpoint": {
+        "type": "assert",
+        "condition": "Redirected to dashboard after login",
+        "target": null,
+        "expected_text": null,
+        "expected_url_contains": "/dashboard"
+      },
+      "precondition_checks": []
+    },
+    {
+      "step_id": "011e9766",
+      "sequence": 4,
+      "description": "Navigate to member search",
+      "action": {
+        "type": "navigate",
+        "url_template": "http://localhost:5001/members?q={member_id}",
+        "wait_for": ".search-panel"
+      },
+      "checkpoint": null,
+      "precondition_checks": []
+    },
+    {
+      "step_id": "15fe2455",
+      "sequence": 5,
+      "description": "Wait for search results to load",
+      "action": {
+        "type": "wait",
+        "condition": ".results-table, .no-results, .not-found",
+        "timeout_ms": 8000
+      },
+      "checkpoint": null,
+      "precondition_checks": []
+    },
+    {
+      "step_id": "cd9d9a4a",
+      "sequence": 6,
+      "description": "Click View link for the first matching member",
+      "action": {
+        "type": "click",
+        "target": {
+          "locators": [
+            {
+              "strategy": "text_content",
+              "value": "View",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "'View' link in the results table — stable text label in the legacy table"
+            },
+            {
+              "strategy": "css_selector",
+              "value": ".results-table a",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Any link in results table — CSS fallback"
+            }
+          ],
+          "snapshot_text": "View",
+          "snapshot_role": null
+        },
+        "risk": "safe"
+      },
+      "checkpoint": {
+        "type": "assert",
+        "condition": "Member detail page loaded",
+        "target": null,
+        "expected_text": null,
+        "expected_url_contains": "/members/"
+      },
+      "precondition_checks": []
+    },
+    {
+      "step_id": "f369205d",
+      "sequence": 7,
+      "description": "Extract savings account balance",
+      "action": {
+        "type": "extract",
+        "output_key": "savings_balance",
+        "target": {
+          "locators": [
+            {
+              "strategy": "css_selector",
+              "value": ".balance",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "Balance column in accounts table — CSS class used consistently across member pages; monospace font class is stable even on legacy apps"
+            },
+            {
+              "strategy": "xpath",
+              "value": "//td[contains(@class,'balance')]",
+              "frame": null,
+              "x": null,
+              "y": null,
+              "description": "XPath fallback for frameset-based legacy apps"
+            }
+          ],
+          "snapshot_text": "$12,450.00",
+          "snapshot_role": null
+        },
+        "attribute": "text_content"
+      },
+      "checkpoint": null,
+      "precondition_checks": []
+    }
+  ],
+  "error_handlers": {
+    "business_outcomes": [
+      {
+        "id": "member_not_found",
+        "description": "Member ID does not exist",
+        "indicator_selector": ".not-found",
+        "indicator_text": "not found",
+        "outcome_code": "MEMBER_NOT_FOUND",
+        "outcome_message_template": "Member not found in the system"
+      },
+      {
+        "id": "no_results",
+        "description": "Search returned no results",
+        "indicator_selector": ".no-results",
+        "indicator_text": null,
+        "outcome_code": "MEMBER_NOT_FOUND",
+        "outcome_message_template": "No member found matching the search query"
+      }
+    ],
+    "recoverable_conditions": [
+      {
+        "id": "page_loading",
+        "description": "Page is still loading (spinner visible)",
+        "indicator_selector": ".loading-spinner",
+        "recovery_action": "wait_and_retry",
+        "max_retries": 3,
+        "retry_delay_ms": 2000
+      }
+    ]
+  },
+  "success_checkpoint": {
+    "type": "assert",
+    "condition": "Member detail page shows balance information",
+    "target": null,
+    "expected_text": null,
+    "expected_url_contains": "/members/"
+  },
+  "overall_risk": "safe",
+  "requires_human_approval": false,
+  "base_tenant_id": null,
+  "tenant_overrides": [],
+  "recorded_at": "2026-09-12T22:09:28.276041+00:00",
+  "recorded_by": "discovery_agent",
+  "discovery_run_id": "7d448fa0",
+  "replay_count": 0,
+  "last_replayed_at": null,
+  "approval_state": "approved"
+}

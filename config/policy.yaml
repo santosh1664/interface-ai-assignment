@@ -1,0 +1,49 @@
+# Safety & Policy Configuration
+# --------------------------------
+# This file controls what the agent is permitted to do.
+# A missing entry means DENIED (deny-by-default).
+
+# Domains the agent may navigate to
+allowed_domains:
+  - "localhost"
+  - "127.0.0.1"
+  # Add real back-office domains per tenant, e.g.:
+  # - "backoffice.creditunion.example"
+
+# Action types permitted in any capability
+allowed_action_types:
+  - navigate
+  - click
+  - type
+  - select
+  - wait
+  - extract
+  - assert
+  - screenshot
+  - dismiss
+
+# Steps that match ANY of these patterns are classified HIGH risk
+# and require human approval before replay proceeds
+high_risk_actions:
+  - type: click
+    description_contains:
+      - "confirm"
+      - "submit"
+      - "delete"
+      - "transfer"
+      - "approve"
+      - "execute"
+  - type: type
+    description_contains:
+      - "amount"
+      - "transfer"
+      - "routing"
+      - "account number"
+
+# If true, HIGH-risk steps in replay raise PolicyViolation
+# and the replay engine escalates to a human. Set false to block instead.
+require_approval_for_high_risk: false
+
+# Hard limits
+max_steps: 40
+step_timeout_ms: 15000

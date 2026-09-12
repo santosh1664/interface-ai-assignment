@@ -1,0 +1,100 @@
+{
+  "run_id": "e2730266-44fa-4ccc-aede-277e8ca1d58e",
+  "capability_id": "911af97c-7519-4a9e-ab27-5420bfa91213",
+  "capability_name": "look_up_member_balance",
+  "capability_version": "1.0.0",
+  "started_at": "2026-09-12T22:11:11.653736+00:00",
+  "finished_at": "2026-09-12T22:11:16.153305+00:00",
+  "outcome": "success",
+  "outcome_code": null,
+  "message": "Capability executed successfully",
+  "outputs": {
+    "savings_balance": "$12450.00"
+  },
+  "steps": [
+    {
+      "step_id": "f9952687",
+      "sequence": 0,
+      "description": "Navigate to CoreBanker login page",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 105
+    },
+    {
+      "step_id": "93108e2f",
+      "sequence": 1,
+      "description": "Enter username 'admin'",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 30
+    },
+    {
+      "step_id": "e3679239",
+      "sequence": 2,
+      "description": "Enter password",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 16
+    },
+    {
+      "step_id": "8da0f588",
+      "sequence": 3,
+      "description": "Click Log In button",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 123
+    },
+    {
+      "step_id": "9e7cf482",
+      "sequence": 4,
+      "description": "Navigate to member search",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 67
+    },
+    {
+      "step_id": "288cef30",
+      "sequence": 5,
+      "description": "Wait for search results to load",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 8
+    },
+    {
+      "step_id": "76c7df5d",
+      "sequence": 6,
+      "description": "Click View link for the first matching member",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 106
+    },
+    {
+      "step_id": "00a560d5",
+      "sequence": 7,
+      "description": "Extract savings account balance",
+      "status": "success",
+      "outcome_type": null,
+      "detail": null,
+      "screenshot_path": null,
+      "duration_ms": 7
+    }
+  ],
+  "failed_step": null,
+  "expected": null,
+  "observed": null,
+  "failure_screenshot": null
+}

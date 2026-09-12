@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CoreBanker - Dashboard</title>
+  <style>
+    body { background: #d4d0c8; font-family: Arial, sans-serif; margin: 0; }
+    .topbar { background: #000080; color: white; padding: 4px 12px; font-size: 13px;
+              display: flex; justify-content: space-between; align-items: center; }
+    .topbar a { color: #aad; font-size: 11px; }
+    .content { padding: 20px; }
+    .menu-panel { background: #e8e8e8; border: 2px outset #fff; padding: 10px; margin-bottom: 16px; }
+    .menu-panel h3 { font-size: 13px; margin: 0 0 8px 0; border-bottom: 1px solid #888; }
+    .menu-item { display: block; padding: 4px 2px; font-size: 13px; color: #000080; text-decoration: none; }
+    .menu-item:hover { text-decoration: underline; }
+    .status { font-size: 11px; color: #555; margin-top: 4px; }
+  </style>
+</head>
+<body>
+<div class="topbar">
+  <span>CoreBanker Staff Portal &mdash; Logged in as: {{ user }}</span>
+  <a href="/logout">Log Out</a>
+</div>
+<div class="content">
+  <div class="menu-panel">
+    <h3>Member Services</h3>
+    <a class="menu-item" href="/members">Search Members</a>
+    <a class="menu-item" href="/members?q=">Browse All Members</a>
+  </div>
+  <div class="status">System: ONLINE &nbsp;|&nbsp; Last login: today &nbsp;|&nbsp; CoreBanker v4.2.1</div>
+</div>
+</body>
+</html>
